@@ -1,7 +1,8 @@
 const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
-const { handleNotFound } = require('./utilities/errorHandler');
+require('express-async-errors');
+const { handleNotFound, errorHandler } = require('./utilities/errorHandler');
 const userSectorRouter = require('./routes/userSector.router');
 require('dotenv').config();
 
@@ -17,6 +18,9 @@ app.use(helmet());
 app.use('/api/v1/user-sectors', userSectorRouter);
 
 app.use('*', handleNotFound);
+
+// To show try catch error so that we don't need to use try catch in every async function
+app.use(errorHandler);
 
 // Connect to mongodb
 app.listen(port, () => {
