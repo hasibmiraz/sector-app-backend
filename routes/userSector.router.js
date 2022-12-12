@@ -34,6 +34,6 @@ router
    *
    * @apiError (Unauthorized 401)  Unauthorized  If wrong user inputs his name
    */
-  .post('/update/:id', updateSector);
+  .post('/update/:id', userSectorValidator, validate, updateSector);
 
 module.exports = router;
