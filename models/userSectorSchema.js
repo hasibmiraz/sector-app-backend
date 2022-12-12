@@ -16,10 +16,6 @@ const userSectorSchema = mongoose.Schema({
     trim: true,
     required: true,
   },
-  branch: {
-    type: String,
-    trim: true,
-  },
   isAgreed: {
     type: Boolean,
     required: true,
