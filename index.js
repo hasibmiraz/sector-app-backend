@@ -4,6 +4,7 @@ const helmet = require('helmet');
 require('express-async-errors');
 const { handleNotFound, errorHandler } = require('./utilities/errorHandler');
 const userSectorRouter = require('./routes/userSector.router');
+const sectorRouter = require('./routes/sectors.router');
 require('dotenv').config();
 
 const app = express();
@@ -16,6 +17,7 @@ app.use(helmet());
 
 // routes
 app.use('/api/v1/user-sectors', userSectorRouter);
+app.use('/api/v1/sectors', sectorRouter);
 
 app.use('*', handleNotFound);
 
