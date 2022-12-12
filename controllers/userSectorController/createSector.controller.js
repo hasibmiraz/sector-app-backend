@@ -1,14 +1,18 @@
 const UserSector = require('../../models/userSectorSchema');
+const { sendError } = require('../../utilities/errorHandler');
 
 exports.createSector = async (req, res) => {
-  const { userId, name, mainSector, subSector, branch, isAgreed } = req.body;
+  const { name, mainSector, subSector, isAgreed } = req.body;
+
+  const availableUser = await UserSector.findOne({ name });
+
+  if (availableUser)
+    return sendError(res, false, 'This user already exists.', 403);
 
   const userSector = new UserSector({
-    userId,
     name,
     mainSector,
     subSector,
-    branch,
     isAgreed,
   });
 
@@ -16,26 +20,4 @@ exports.createSector = async (req, res) => {
   return res
     .status(200)
     .send({ success: true, message: 'Users sector was saved successfully.' });
-};
-
-exports.updateSector = async (req, res) => {
-  const { name, mainSector, subSector, branch } = req.body;
-
-  await UserSector.findByIdAndUpdate(
-    {
-      _id: req.params.id,
-    },
-    {
-      $set: {
-        name,
-        mainSector,
-        subSector,
-        branch,
-      },
-    }
-  );
-
-  return res
-    .status(200)
-    .send({ success: true, message: 'Users sector was updated successfully.' });
 };

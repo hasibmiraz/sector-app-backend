@@ -1,8 +1,10 @@
 const express = require('express');
 const {
   createSector,
-  updateSector,
 } = require('../controllers/userSectorController/createSector.controller');
+const {
+  updateSector,
+} = require('../controllers/userSectorController/updateSector.controller');
 const { userSectorValidator, validate } = require('../middlewares/validators');
 const router = express.Router();
 
